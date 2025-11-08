@@ -1,28 +1,42 @@
-/* Fonts */
 body {
   font-family: 'Inter', sans-serif;
   color: #333;
+  scroll-behavior: smooth;
 }
 
-/* Hero Section */
+/* Hero */
+/* Add spacing so hero content is not hidden under fixed navbar */
 .hero {
-  min-height: 80vh;
+  padding-top: 120px; /* Adjust based on navbar height */
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
+.hero .container {
+  margin-top: 50px; /* Push content down if needed */
+}
+
 
 /* Feature Cards */
 .feature-card .icon-wrapper {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 15px;
 }
 
+/* Testimonial Cards */
+.testimonial-card {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
 
 /* Buttons Hover */
 .btn-primary:hover {
@@ -33,6 +47,7 @@ body {
 .btn-outline-light:hover {
   background: #ffc107;
   color: #0d3b66;
+  border-color: #ffc107;
 }
 
 /* Sections Spacing */
@@ -41,9 +56,16 @@ section {
   padding-bottom: 80px;
 }
 
-/* Responsive adjustments */
+/* Footer Links Hover */
+footer a:hover {
+  color: #ffc107;
+  text-decoration: none;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .hero {
-    min-height: 60vh;
+    min-height: 70vh;
+    padding: 2rem 1rem;
   }
 }

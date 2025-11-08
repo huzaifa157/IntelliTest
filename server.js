@@ -37,6 +37,11 @@ db.connect((err) => {
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/test", (req, res) => {
+  res.render("test");
+});
+
+
 
 // Start server
 app.listen(process.env.PORT, () => {
