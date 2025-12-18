@@ -5,6 +5,10 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 
 const app = express();
+const dotenv = require("dotenv");
+const mysql = require("mysql2");
+const path = require("path");
+const ejsMate = require("ejs-mate");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,26 +23,21 @@ app.use(
   })
 );
 
-// MySQL Connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Hellosql23db",
-  database: "testifyiq",
-});
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Home
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-// Registration
-app.get("/register", (req, res) => {
-  res.render("register", { error: [] });
-});
+app.set("view engine" , "ejs");
+app.engine("ejs" , ejsMate);
+app.set("views", path.join(__dirname, "views"));
 
-app.post("/register", async (req, res) => {
-  const { username, email, password, qualification } = req.body;
+app.use(express.static(path.join(__dirname,"/public")))
+
 
   if (!username || !email || !password || !qualification) {
     return res.render("register", { error: ["All fields are required"] });
@@ -77,6 +76,11 @@ app.post("/login", (req, res) => {
     res.redirect("/test");
   });
 });
+app.get("/test", (req, res) => {
+  res.render("test");
+});
+
+
 
 // Test Page
 app.get("/test", (req, res) => {

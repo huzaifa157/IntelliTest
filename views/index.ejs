@@ -1,34 +1,263 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>TestifyIQ – Smart Assessment Platform</title>
- <link rel="stylesheet" href="/css/style.css?v=1.1">
-</head>
-<body class="landing-body">
 
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Testify<span>IQ</span></h1>
-      <p>Measure your intelligence.  
-         Challenge your mind.  
-         Level up your future.</p>
 
-      <div class="hero-buttons">
-        <a href="/register" class="btn btn-glow">Get Started</a>
-        <a href="/login" class="btn btn-outline">Login</a>
+<% layout('layouts/boilerplate') %>
+
+
+
+  <!-- Hero Section -->
+
+<section id="home" class="hero pt-5 d-flex align-items-center text-dark">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      
+      <!-- Left Content -->
+      <div class="col-md-6 text-md-start text-center">
+        <span class="badge bg-primary-subtle text-primary fw-semibold mb-3">
+          Trusted IQ Assessment Platform
+        </span>
+
+        <h1 class="display-4 fw-bold mt-3">
+          Measure Your <span class="text-primary">Intelligence</span><br>
+          With Scientific Accuracy
+        </h1>
+
+        <p class="lead text-muted mt-3 mb-4">
+          Take a professionally designed IQ test with adaptive questions,
+          real-time scoring, and instant certification.
+        </p>
+
+        <div class="d-flex gap-3 justify-content-md-start justify-content-center">
+          <a href="/test" class="btn btn-primary btn-lg rounded-pill px-5 fw-semibold">
+            Start Free Test
+          </a>
+          <a href="#how-it-works" class="btn btn-outline-primary btn-lg rounded-pill px-4">
+            How It Works
+          </a>
+        </div>
+
+        <!-- Trust Text -->
+        <p class="small text-muted mt-4">
+          ✔ Used by students & professionals worldwide
+        </p>
       </div>
-    </div>
 
-    <div class="hero-card">
-      <h3>What You’ll Get</h3>
-      <ul>
-        <li>🎯 AI-based IQ Questions</li>
-        <li>📊 Instant Results & Scores</li>
-        <li>🧠 Difficulty-Based Tests</li>
-        <li>⚡ Clean & Fast Interface</li>
-      </ul>
+      <!-- Right Visual -->
+      <div class="col-md-6 text-center mt-5 mt-md-0">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png"
+             class="img-fluid"
+             style="max-width: 420px;"
+             alt="IQ Test Illustration">
+      </div>
+
     </div>
   </div>
+</section>
 
+<section class="py-4 bg-white border-top border-bottom">
+  <div class="container">
+    <div class="row text-center">
+
+      <div class="col-md-3 col-6 mb-3">
+        <h3 class="fw-bold text-primary">50K+</h3>
+        <p class="small text-muted">Tests Taken</p>
+      </div>
+
+      <div class="col-md-3 col-6 mb-3">
+        <h3 class="fw-bold text-primary">98%</h3>
+        <p class="small text-muted">Accuracy Rate</p>
+      </div>
+
+      <div class="col-md-3 col-6 mb-3">
+        <h3 class="fw-bold text-primary">3 Levels</h3>
+        <p class="small text-muted">Difficulty Modes</p>
+      </div>
+
+      <div class="col-md-3 col-6 mb-3">
+        <h3 class="fw-bold text-primary">Instant</h3>
+        <p class="small text-muted">Certificates</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+  <!-- Features Section -->
+
+<!-- Features Section -->
+<section id="features" class="py-5 bg-light">
+  <div class="container">
+
+    <!-- Section Heading -->
+    <div class="text-center mb-5">
+      <span class="badge bg-success-subtle text-success fw-semibold px-3 py-2">
+        Key Features
+      </span>
+      <h2 class="fw-bold text-dark mt-3">
+        Designed for Accurate IQ Measurement
+      </h2>
+      <p class="text-muted mt-2">
+        IntelliTest combines structured logic, controlled timing, and
+        data-driven evaluation to deliver meaningful intelligence results.
+      </p>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="row g-4">
+
+      <!-- Feature 1 -->
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100 bg-white rounded-4 shadow-sm text-center">
+          <div class="icon-box mx-auto mb-3">
+            <i class="bi bi-diagram-3 fs-3 text-success"></i>
+          </div>
+          <h5 class="fw-semibold text-dark mb-2">
+            Structured Question Design
+          </h5>
+          <p class="text-muted small">
+            Questions are logically categorized and designed to evaluate
+            reasoning, pattern recognition, and analytical skills.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100 bg-white rounded-4 shadow-sm text-center">
+          <div class="icon-box mx-auto mb-3">
+            <i class="bi bi-clock fs-3 text-success"></i>
+          </div>
+          <h5 class="fw-semibold text-dark mb-2">
+            Controlled Time Assessment
+          </h5>
+          <p class="text-muted small">
+            A time-bound testing environment ensures focus and reflects
+            real-world cognitive evaluation standards.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100 bg-white rounded-4 shadow-sm text-center">
+          <div class="icon-box mx-auto mb-3">
+            <i class="bi bi-graph-up fs-3 text-success"></i>
+          </div>
+          <h5 class="fw-semibold text-dark mb-2">
+            Intelligent Scoring System
+          </h5>
+          <p class="text-muted small">
+            Automatic score calculation based on accuracy and performance,
+            providing unbiased and instant IQ results.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100 bg-white rounded-4 shadow-sm text-center">
+          <div class="icon-box mx-auto mb-3">
+            <i class="bi bi-mortarboard fs-3 text-success"></i>
+          </div>
+          <h5 class="fw-semibold text-dark mb-2">
+            Qualification-Based Tests
+          </h5>
+          <p class="text-muted small">
+            Test difficulty and content are adjusted according to the
+            user’s educational level for fair evaluation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100 bg-white rounded-4 shadow-sm text-center">
+          <div class="icon-box mx-auto mb-3">
+            <i class="bi bi-patch-check fs-3 text-success"></i>
+          </div>
+          <h5 class="fw-semibold text-dark mb-2">
+            Instant Results & Certificate
+          </h5>
+          <p class="text-muted small">
+            Receive immediate performance feedback and download
+            a professional IQ certificate upon test completion.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100 bg-white rounded-4 shadow-sm text-center">
+          <div class="icon-box mx-auto mb-3">
+            <i class="bi bi-shield-lock fs-3 text-success"></i>
+          </div>
+          <h5 class="fw-semibold text-dark mb-2">
+            Secure Data Handling
+          </h5>
+          <p class="text-muted small">
+            User information and test data are securely managed using
+            validation, constraints, and controlled database access.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5 text-primary">How It Works</h2>
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <i class="bi bi-person-check fs-1 text-primary mb-3"></i>
+          <h5 class="fw-bold mb-2">Register</h5>
+          <p class="text-muted">Create your account to access personalized IQ tests.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="bi bi-question-circle fs-1 text-primary mb-3"></i>
+          <h5 class="fw-bold mb-2">Take Test</h5>
+          <p class="text-muted">Answer adaptive questions designed to measure your intelligence accurately.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="bi bi-award fs-1 text-primary mb-3"></i>
+          <h5 class="fw-bold mb-2">Get Results</h5>
+          <p class="text-muted">Receive instant scoring and download your certificate immediately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section text-white text-center py-5" style="background: linear-gradient(135deg, #0d3b66, #145DA0);">
+    <div class="container">
+      <h2 class="fw-bold mb-3">
+       Discover Your True Cognitive Potential
+     </h2>
+
+   <p class="mb-4 text-light">
+      Join thousands who have evaluated their intelligence
+      through structured and reliable IQ assessments.
+    </p>
+
+      
+      <a href="/register" class="btn btn-outline-light btn-lg px-5 py-2 rounded-pill fw-semibold">Get Started Now</a>
+    </div>
+  </section>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
