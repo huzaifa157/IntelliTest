@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IQ Test | TestifyIQ</title>
+  <link rel="stylesheet" href="/css/style.css?v=1.1">
+</head>
+<body class="auth-body">
+
+<div class="test-container">
+
+  <h1>🧠 Intelligence Quotient Test</h1>
+
+  <% if (!started) { %>
+
+  <!-- START TEST SCREEN -->
+  <div class="start-card">
+    <p>Select difficulty level to begin your test</p>
+
+    <form action="/start-test" method="POST">
+      <select name="difficulty" required>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+
+      <button type="submit" class="btn btn-glow full">
+        Start Test
+      </button>
+    </form>
+  </div>
+
+  <% } else { %>
+
+  <!-- QUESTION SCREEN -->
+  <form action="/submit-test" method="POST" class="question-form">
+
+    <% questions.forEach((q, i) => { %>
+      <div class="question-block">
+        <h3><%= i + 1 %>. <%= q.question %></h3>
+
+        <label class="option-label">
+  <input type="radio" name="<%= q.id %>" value="1" required>
+  <span><%= q.option1 %></span>
+</label>
+   
+       <label class="option-label">
+  <input type="radio" name="<%= q.id %>" value="2" required>
+  <span><%= q.option2 %></span>
+</label>
+
+
+        <label class="option-label">
+  <input type="radio" name="<%= q.id %>" value="3" required>
+  <span><%= q.option3 %></span>
+</label>
+
+
+        <label class="option-label">
+  <input type="radio" name="<%= q.id %>" value="4" required>
+  <span><%= q.option4 %></span>
+        </label>
+      </div>
+    <% }) %>
+
+    <button type="submit" class="btn btn-glow full">
+      Submit Test
+    </button>
+
+  </form>
+
+  <% } %>
+
+</div>
+
+</body>
+</html>
