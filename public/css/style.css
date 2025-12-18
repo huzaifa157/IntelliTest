@@ -1,71 +1,208 @@
+/* 1. Global Typography & Reset */
+:root {
+    --primary-color: #0d6efd;
+    --primary-dark: #0a58ca;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --bg-light: #f8f9fa;
+    --transition-speed: 0.3s;
+}
+
 body {
-  font-family: 'Inter', sans-serif;
-  color: #333;
-  scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif; /* Clean, modern font */
+    color: var(--text-dark);
+    overflow-x: hidden;
 }
 
-/* Hero */
-/* Add spacing so hero content is not hidden under fixed navbar */
+h1, h2, h3, h4, h5 {
+    font-weight: 700;
+    letter-spacing: -0.5px; /* Tighter spacing for headlines */
+}
+
+/* 2. Hero Section */
 .hero {
-  padding-top: 120px; /* Adjust based on navbar height */
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-.hero .container {
-  margin-top: 50px; /* Push content down if needed */
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* Subtle grey gradient */
+    position: relative;
+    overflow: hidden;
 }
 
-
-/* Feature Cards */
-.feature-card .icon-wrapper {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
+.hero h1 {
+    line-height: 1.2;
 }
 
-/* Testimonial Cards */
-.testimonial-card {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+/* Floating Animation for Hero Image */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
 }
 
-/* Buttons Hover */
+.hero img {
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 20px 30px rgba(13, 110, 253, 0.15)); /* Soft blue shadow */
+}
+
+/* 3. Buttons (Modernizing Bootstrap) */
+.btn {
+    padding: 0.75rem 1.5rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-primary {
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
 .btn-primary:hover {
-  background: #0b2f5a;
-  border-color: #0b2f5a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
 }
 
-.btn-outline-light:hover {
-  background: #ffc107;
-  color: #0d3b66;
-  border-color: #ffc107;
+/* 4. Stats Section */
+section.border-top.border-bottom {
+    background-color: #ffffff;
+    border-color: #f0f0f0 !important;
 }
 
-/* Sections Spacing */
-section {
-  padding-top: 80px;
-  padding-bottom: 80px;
+/* 5. Feature Cards (The "Glass" Effect) */
+.feature-card {
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all var(--transition-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    z-index: 1;
 }
 
-/* Footer Links Hover */
-footer a:hover {
-  color: #ffc107;
-  text-decoration: none;
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important; /* Smooth lift shadow */
+    border-color: transparent;
 }
 
-/* Responsive */
+/* Icon Styling inside Features */
+.icon-box {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(25, 135, 84, 0.1); /* Soft green bg matching text-success */
+    transition: transform var(--transition-speed);
+}
+
+.feature-card:hover .icon-box {
+    transform: scale(1.1); /* Icon pops slightly on hover */
+    background: rgba(25, 135, 84, 0.2);
+}
+
+/* 6. How It Works (Steps) */
+#how-it-works i {
+    display: inline-flex;
+    width: 80px;
+    height: 80px;
+    background: #eef5ff; /* Very light blue */
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#how-it-works .col-md-4:hover i {
+    background: var(--primary-color);
+    color: white;
+    transform: rotateY(180deg); /* Playful interaction */
+}
+
+/* 7. CTA Section */
+.cta-section {
+    position: relative;
+    /* The inline style in HTML is fine, but this adds a pattern overlay */
+    background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 25%),
+                      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 25%);
+
+    border-radius: 2rem;
+}
+
+.cta-section .btn-outline-light:hover {
+    background-color: #fff;
+    color: var(--primary-dark);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); /* Glow effect */
+}
+
+
+
+/* footor  */
+/* Typography and Spacing */
+.footer {
+    letter-spacing: -0.01em;
+    border-radius: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    
+}
+
+.tracking-tight {
+    letter-spacing: -0.03em;
+}
+
+.x-small {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Nav Link Styling */
+.nav-link-footer {
+    color: #64748b; /* Modern Slate color */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link-footer:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+    text-underline-offset: 4px; /* Better looking underline */
+}
+
+/* Social Icon Effects */
+.social-icon-link {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: inline-block;
+}
+
+.social-icon-link:hover {
+    color: #1e293b;
+    transform: translateY(-3px);
+}
+
+/* Subtle border color */
+.footer .border-top {
+    border-top: 1px solid #f1f5f9 !important; /* Very soft gray-blue */
+}
+
+
+/* 8. Mobile Responsiveness Adjustments */
 @media (max-width: 768px) {
-  .hero {
-    min-height: 70vh;
-    padding: 2rem 1rem;
-  }
+    .display-4 {
+        font-size: 2.5rem; /* Smaller hero text on mobile */
+    }
+    
+    .hero img {
+        max-width: 80% !important;
+        margin-top: 2rem;
+    }
+    
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+
+     .nav-link-footer {
+        display: block;
+        padding: 8px 0;
+    }
 }
