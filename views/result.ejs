@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Result | TestifyIQ</title>
+  <link rel="stylesheet" href="/css/style.css?v=1.1">
+</head>
+<body class="auth-body">
+
+<div class="result-card">
+
+  <h1>🎉 Test Completed</h1>
+
+  <div class="result-score">
+    <%= score %> / <%= total %>
+  </div>
+
+  <div class="result-details">
+    <p><strong>Date:</strong>
+      <%= timestamp ? new Date(timestamp).toLocaleString() : "N/A" %>
+    </p>
+
+    <p><strong>Qualification:</strong> <%= qualification %></p>
+  </div>
+
+  <div class="result-actions">
+    <a href="/test" class="btn btn-glow">Take Test Again</a>
+    <a href="/" class="btn btn-outline">Home</a>
+  </div>
+
+</div>
+
+</body>
+</html>
