@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Register | TestifyIQ</title>
-    <link rel="stylesheet" href="/css/style.css?v=1.1">
-</head>
+
+<% layout('layouts/boilerplate') %>
+
 <body class="auth-body">
 
 <div class="auth-container wide"> 
   <div class="auth-right">
     <h2>Create Your Account</h2>
+
+
+    <% if (error && error.length > 0) { %>
+  <div class="alert-container" style="color: #ff4d4d; background: rgba(255, 77, 77, 0.1); padding: 10px; border-radius: 5px; margin-bottom: 15px; border-left: 4px solid #ff4d4d;">
+    <% error.forEach(err => { %>
+      <p style="margin: 0; font-size: 0.9rem;">⚠️ <%= err %></p>
+    <% }) %>
+  </div>
+<% } %>
 
     <form action="/register" method="POST">
       <input type="text" name="username" placeholder="Full Name" required>

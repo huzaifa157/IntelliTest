@@ -1,33 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Your Result | TestifyIQ</title>
-  <link rel="stylesheet" href="/css/style.css?v=1.1">
-</head>
-<body class="auth-body">
+<% layout('layouts/boilerplate') %>
 
-<div class="result-card">
+<div class="auth-body">
+    <div class="result-card shadow-lg border-0">
+        <h1 class="display-6 fw-bold text-dark">🎉 Test Completed</h1>
+        
+        <div class="result-score">
+            <%= score %>
+        </div>
 
-  <h1>🎉 Test Completed</h1>
+        <div class="result-details">
+            <p><strong><i class="bi bi-calendar3 me-2"></i>Date:</strong> 
+                <%= timestamp ? new Date(timestamp).toLocaleDateString() : "N/A" %>
+            </p>
+            <p><strong><i class="bi bi-mortarboard me-2"></i>Level:</strong> 
+                <span class="badge bg-primary rounded-pill"><%= qualification %></span>
+            </p>
+            <p><strong><i class="bi bi-check-circle me-2"></i>Accuracy:</strong> 
+                <%= Math.round((score / total) * 100) %>%
+            </p>
+        </div>
 
-  <div class="result-score">
-    <%= score %> / <%= total %>
-  </div>
-
-  <div class="result-details">
-    <p><strong>Date:</strong>
-      <%= timestamp ? new Date(timestamp).toLocaleString() : "N/A" %>
-    </p>
-
-    <p><strong>Qualification:</strong> <%= qualification %></p>
-  </div>
-
-  <div class="result-actions">
-    <a href="/test" class="btn btn-glow">Take Test Again</a>
-    <a href="/" class="btn btn-outline">Home</a>
-  </div>
-
+        <div class="result-actions">
+            <a href="/test" class="btn btn-glow px-4">Retake Test</a>
+            <a href="/" class="btn btn-outline px-4">Home</a>
+        </div>
+    </div>
 </div>
-
-</body>
-</html>

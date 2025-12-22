@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS testifyiq;
 USE testifyiq;
 
 -- Users Table
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100),
     email VARCHAR(100) UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 
 -- Questions Table
-CREATE TABLE questions (
+CREATE TABLE IF NOT EXISTS questions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     qualification ENUM('Matric','Intermediate','Graduation'),
     difficulty ENUM('Easy','Medium','Hard'),
@@ -24,13 +24,12 @@ CREATE TABLE questions (
     correct_option INT
 );
 
--- Results Table
-CREATE TABLE results (
+-- Results Table (Linked to Users)
+CREATE TABLE IF NOT EXISTS results (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     score INT,
     total INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
-
