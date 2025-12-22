@@ -1,99 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IntelliTest | Challenge Your Mind</title>
+<% layout('layouts/boilerplate') %>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/style.css">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold fs-4" href="/">🧠 IntelliTest</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-          <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section d-flex align-items-center text-center text-white">
-    <div class="container">
-      <h1 class="display-4 fw-bold mb-3 fade-in">Challenge Your Mind with IntelliTest</h1>
-      <p class="lead mb-4 fade-in-delay">
-        Take adaptive IQ tests tailored to your qualification and skill level — and get instant results with certificates!
-      </p>
-      <a href="/test" class="btn btn-light btn-lg px-4 py-2 shadow-lg fade-in-delay">Start Your Test</a>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="py-5 bg-light text-center">
-    <div class="container">
-      <h2 class="fw-bold text-primary mb-4">Why IntelliTest?</h2>
-      <p class="text-muted mx-auto mb-5" style="max-width: 700px;">
-        IntelliTest is designed to evaluate your intelligence quotient using modern testing algorithms. 
-        We provide a professional experience that adjusts difficulty and gives instant, meaningful feedback.
-      </p>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card feature-card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-primary fw-bold">🎯 Adaptive Difficulty</h5>
-              <p class="card-text text-muted">Each question set adjusts based on your qualification and previous answers.</p>
-            </div>
-          </div>
+<main class="container my-5 pt-5">
+    <% if (!started) { %>
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-dark mb-3">Ready to begin, <%= currentUser.username %>?</h1>
+            <p class="text-muted mb-4">Level: <span class="badge bg-primary rounded-pill"><%= currentUser.qualification %></span></p>
+            
+            <form action="/start-test" method="POST">
+                <button type="submit" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow fw-bold">
+                    Confirm & Start Now
+                </button>
+            </form>
         </div>
-        <div class="col-md-4">
-          <div class="card feature-card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-primary fw-bold">⏱️ Real-Time Timer</h5>
-              <p class="card-text text-muted">Our timer feature keeps your test realistic, simulating real-world IQ conditions.</p>
+
+        <div class=
+        "row g-4 mt-2">
+            <h2 class="text-center fw-bold mb-4 text-primary">Important Guidelines</h2>
+            <div class="col-md-4">
+                <div class="card feature-card h-100 border-0 shadow-sm p-4 text-center">
+                    <div class="fs-1 mb-2">⏱️</div>
+                    <h5 class="fw-bold">Time Management</h5>
+                    <p class="small text-muted">Focus on speed and accuracy. Do not refresh once started.</p>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card feature-card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-primary fw-bold">🏆 Instant Certificate</h5>
-              <p class="card-text text-muted">At the end, get a downloadable PDF certificate with your score and performance stats.</p>
+            <div class="col-md-4">
+                <div class="card feature-card h-100 border-0 shadow-sm p-4 text-center">
+                    <div class="fs-1 mb-2">🔇</div>
+                    <h5 class="fw-bold">Focus Area</h5>
+                    <p class="small text-muted">A quiet environment ensures maximum concentration.</p>
+                </div>
             </div>
-          </div>
+            <div class="col-md-4">
+                <div class="card feature-card h-100 border-0 shadow-sm p-4 text-center">
+                    <div class="fs-1 mb-2">🚫</div>
+                    <h5 class="fw-bold">No Assistance</h5>
+                    <p class="small text-muted">Calculators or search engines invalidate your score.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section class="cta-section text-center text-white py-5">
-    <div class="container">
-      <h2 class="fw-bold mb-3">Ready to Test Your Intelligence?</h2>
-      <p class="lead mb-4">Join thousands of learners enhancing their IQ with IntelliTest.</p>
-      <a href="/register" class="btn btn-light btn-lg px-5 py-2 shadow">Get Started</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-primary text-white text-center py-3">
-    <p class="mb-0">© 2025 IntelliTest | Developed by Team O</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <% } else { %>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 p-5 rounded-4">
+                    <h2 class="text-center mb-4 fw-bold">IQ Assessment In Progress</h2>
+                    <form action="/submit-test" method="POST">
+                        <% questions.forEach((q, index) => { %>
+                            <div class="mb-5 p-4 bg-light rounded-3">
+                                <h5 class="fw-bold mb-3">Question <%= index + 1 %>:</h5>
+                                <p class="fs-5 mb-4"><%= q.question %></p>
+                                
+                                <div class="options-grid">
+                                    <% [1, 2, 3, 4].forEach(i => { %>
+                                        <div class="form-check custom-option mb-2">
+                                            <input class="form-check-input" type="radio" name="<%= q.id %>" value="<%= i %>" id="q<%= q.id %>o<%= i %>" required>
+                                            <label class="form-check-label w-100" for="q<%= q.id %>o<%= i %>">
+                                                <%= q['option' + i] %>
+                                            </label>
+                                        </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        <% }) %>
+                        <button type="submit" class="btn btn-success w-100 btn-lg fw-bold rounded-pill">Submit Answers</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</main>

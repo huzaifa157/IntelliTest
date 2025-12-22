@@ -185,6 +185,248 @@ section.border-top.border-bottom {
     border-top: 1px solid #f1f5f9 !important; /* Very soft gray-blue */
 }
 
+/* Auth Pages Global Styles */
+
+.auth-body {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Stacks the form and the footer */
+    align-items: center;
+    padding-top: 80px; /* Space for the fixed navbar */
+    margin-top: 3rem;
+}
+
+/* Updated Auth Container width and spacing */
+.auth-container.wide {
+    display: flex;
+    width: 90%;
+    max-width: 1100px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 60px; /* Essential: creates space before the footer */
+}
+
+
+/* Ensure the blue side looks high-end */
+.auth-left.gradient-alt {
+    flex: 1;
+    background: linear-gradient(135deg, #0d6efd 0%, #2563eb 100%);
+    padding: 80px 60px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Left Panel - Branding */
+
+.auth-left h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.auth-left p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+/* Right Panel - Form */
+.auth-right {
+    flex: 1.2;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-right h2 {
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 30px;
+}
+
+.auth-right input, 
+.auth-right select {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.auth-right input:focus, 
+.auth-right select:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+}
+
+/* Submit Button */
+.btn-glow {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+
+.btn-glow:hover {
+    background: #0a58ca;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
+}
+
+.auth-switch {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.auth-switch a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Form Label Refinement */
+.form-label {
+    margin-bottom: 0.4rem;
+    display: block;
+}
+
+/* Alert Styling */
+.alert-danger {
+    background-color: #fff1f2;
+    color: #e11d48;
+    border: 1px solid #fda4af;
+    margin-bottom: 20px;
+}
+
+
+
+/* --- TEST SESSION SPECIFIC STYLES --- */
+
+/* Hide the standard blue radio circle */
+#test-session .form-check-input {
+    display: none !important;
+}
+
+/* Style the label as a large clickable button */
+#test-session .custom-option label {
+    display: block;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    padding: 16px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0;
+}
+
+/* Hover effect - subtle slide and background change */
+#test-session .custom-option label:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateX(8px);
+}
+
+/* Selection Effect - Blue glow when checked */
+#test-session .form-check-input:checked + label {
+    background: #e0f2fe;
+    border-color: var(--primary-color);
+    color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+    font-weight: 700;
+}
+
+/* Question Box Decoration */
+#test-session .question-box {
+    border-left: 6px solid var(--primary-color);
+    background-color: #ffffff !important;
+}
+
+
+/* --- Result Page Styling --- */
+.result-card {
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.result-score {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result-score::after {
+    content: "Your IQ Score";
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-top: -5px;
+}
+
+.result-details {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.result-details p {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.result-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-outline {
+    border: 2px solid #e2e8f0;
+    color: var(--text-dark);
+    padding: 14px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+
+
+
 
 /* 8. Mobile Responsiveness Adjustments */
 @media (max-width: 768px) {
@@ -205,4 +447,17 @@ section.border-top.border-bottom {
         display: block;
         padding: 8px 0;
     }
+
+    .auth-container {
+        flex-direction: column-reverse;
+        margin: 20px;
+    }
+    .auth-left {
+        padding: 40px;
+        text-align: center;
+    }
 }
+
+
+
+
