@@ -20,7 +20,7 @@
 - [License](#license)
 
 ## Overview
-IntelliTest is a comprehensive MERN-based platform for intelligent test generation, management, and certification. It enables users to register, log in, take dynamically generated tests, view results, and download personalized certificates in PDF format. The system supports multiple qualification levels and difficulty tiers.
+IntelliTest is a comprehensive web-based platform for intelligent test generation, management, and certification. It enables users to register, log in, take dynamically generated tests, view results, and download personalized certificates in PDF format. The system supports multiple qualification levels and difficulty tiers.
 
 ## Features
 - User registration and authentication (secure, hashed passwords)
