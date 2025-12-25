@@ -1,17 +1,19 @@
+// Load ENV first (ONLY ONCE)
+require("dotenv").config();
+
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
-const dotenv = require("dotenv");
-const mysql = require("mysql2");
 const path = require("path");
+const mysql = require("mysql2");
 const ejsMate = require("ejs-mate");
 
+const generateCertificate = require("./utils/certificate");
+
 const app = express();
-dotenv.config();
 
 // --- 1. DATABASE CONNECTION ---
-// Database Connection using Environment Variables
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -21,15 +23,11 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) {
-        console.error("❌ Database connection failed: " + err.message);
+        console.error("❌ Database connection failed:", err.message);
         return;
     }
     console.log("✅ MySQL Connected Successfully!");
 });
-
-
-
-
 
 // --- 2. MIDDLEWARE & CONFIG ---
 app.engine("ejs", ejsMate);
@@ -46,14 +44,12 @@ app.use(
         saveUninitialized: false,
     })
 );
- 
-// --- 3. ROUTES: HOME & AUTH ---
 
+// --- 3. ROUTES: HOME & AUTH ---
 app.get("/", (req, res) => {
     res.render("index");
 });
 
-// Register
 app.get("/register", (req, res) => {
     res.render("register", { error: [] });
 });
@@ -72,27 +68,19 @@ app.post("/register", async (req, res) => {
             [username, email, hashedPassword, qualification],
             (err) => {
                 if (err) {
-                    // 1. Log the error to your VS Code terminal so you can read it
-                    console.error("FULL DATABASE ERROR:", err);
-
-                    // 2. Pass the specific error message to the user
-                    let userFriendlyError = "Database error";
-                    if (err.code === 'ER_DUP_ENTRY') {
-                        userFriendlyError = "This email is already registered.";
-                    } else {
-                        userFriendlyError = err.sqlMessage || "Database error occurred";
-                    }
-
-                    return res.render("register", { error: [userFriendlyError] });
+                    let msg = err.code === "ER_DUP_ENTRY"
+                        ? "This email is already registered."
+                        : "Database error";
+                    return res.render("register", { error: [msg] });
                 }
                 res.redirect("/login");
             }
         );
-    } catch (e) {
+    } catch {
         res.render("register", { error: ["Registration failed"] });
     }
 });
-// Login
+
 app.get("/login", (req, res) => {
     res.render("login", { error: [] });
 });
@@ -101,87 +89,99 @@ app.post("/login", (req, res) => {
     const { email, password } = req.body;
 
     db.query("SELECT * FROM users WHERE email = ?", [email], async (err, rows) => {
-        if (err) return res.render("login", { error: ["Database error"] });
-        if (rows.length === 0) return res.render("login", { error: ["User not found"] });
+        if (err || rows.length === 0)
+            return res.render("login", { error: ["Invalid credentials"] });
 
         const user = rows[0];
-        const passMatch = await bcrypt.compare(password, user.password);
-
-        if (!passMatch) return res.render("login", { error: ["Incorrect password"] });
+        const match = await bcrypt.compare(password, user.password);
+        if (!match)
+            return res.render("login", { error: ["Invalid credentials"] });
 
         req.session.user = user;
         res.redirect("/test");
     });
 });
 
-// --- 4. ROUTES: TEST LOGIC ---
+// --- 4. TEST ROUTES ---
 app.get("/test", (req, res) => {
     if (!req.session.user) return res.redirect("/login");
-    // Explicitly set started to false for the initial dashboard view
-    res.render("test", { 
-        currentUser: req.session.user, 
-        started: false, 
-        questions: [] 
+
+    res.render("test", {
+        currentUser: req.session.user,
+        started: false,
+        questions: []
     });
 });
 
 app.post("/start-test", (req, res) => {
     if (!req.session.user) return res.redirect("/login");
 
-    const userQ = req.session.user.qualification;
     db.query(
         "SELECT * FROM questions WHERE qualification = ? ORDER BY RAND() LIMIT 10",
-        [userQ],
+        [req.session.user.qualification],
         (err, questions) => {
             if (err) return res.send("Database error");
-            res.render("test", { questions, started: true });
+            res.render("test", { started: true, questions });
         }
     );
 });
-
 
 app.post("/submit-test", (req, res) => {
     if (!req.session.user) return res.redirect("/login");
 
     const answers = req.body;
-    const ids = Object.keys(answers).map(id => Number(id)).filter(id => !isNaN(id));
+    const ids = Object.keys(answers).map(Number);
 
-    if (ids.length === 0) return res.send("No answers submitted");
+    db.query(
+        "SELECT id, correct_option FROM questions WHERE id IN (?)",
+        [ids],
+        (err, rows) => {
+            if (err) return res.send("Scoring error");
 
-    // Use '?' placeholders for security
-    const sql = "SELECT id, correct_option FROM questions WHERE id IN (?)";
+            let score = 0;
+            rows.forEach(q => {
+                if (String(answers[q.id]) === String(q.correct_option)) score++;
+            });
 
-    db.query(sql, [ids], (err, rows) => {
-        if (err) {
-            console.error(err); // This helps you see the REAL error in your terminal
-            return res.send("Database error during scoring");
+            // 🔹 SAVE RESULT IN SESSION FOR CERTIFICATE
+            req.session.lastResult = {
+                score,
+                total: rows.length,
+                qualification: req.session.user.qualification
+            };
+
+            db.query(
+                "INSERT INTO results (user_id, score, total, created_at) VALUES (?,?,?,NOW())",
+                [req.session.user.id, score, rows.length]
+            );
+
+            res.render("result", {
+                score,
+                total: rows.length,
+                timestamp: new Date(),
+                qualification: req.session.user.qualification
+            });
         }
+    );
+});
 
-        let score = 0;
-        rows.forEach((q) => {
-            // Ensure types match (string vs number)
-            if (String(answers[q.id]) === String(q.correct_option)) score++;
-        });
+// --- 5. CERTIFICATE DOWNLOAD ROUTE ---
+app.get("/certificate", (req, res) => {
+    if (!req.session.user || !req.session.lastResult)
+        return res.redirect("/login");
 
-        // Insert result into DB
-        db.query(
-            "INSERT INTO results (user_id, score, total, created_at) VALUES (?,?,?, NOW())",
-            [req.session.user.id, score, rows.length],
-            (err) => {
-                if (err) console.error("Result save error:", err);
-                
-                // Render the page AFTER the attempt to save (or inside the callback)
-                res.render("result", {
-                    score: score,
-                    total: rows.length,
-                    timestamp: new Date(),
-                    qualification: req.session.user.qualification,
-                });
-            }
-        );
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=certificate.pdf");
+
+    generateCertificate(res, {
+        name: req.session.user.username,
+        qualification: req.session.lastResult.qualification,
+        score: req.session.lastResult.score,
+        total: req.session.lastResult.total,
     });
 });
 
-
-// --- 5. START SERVER ---
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+// --- 6. START SERVER ---
+app.listen(3000, () =>
+    console.log("🚀 Server running on http://localhost:3000")
+);

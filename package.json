@@ -11,7 +11,24 @@
     "express": "^5.2.1",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.2",
+    "mongoose": "^9.0.2",
     "mysql2": "^3.16.0",
     "openai": "^6.15.0"
-  }
+  },
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huzaifa157/IntelliTest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huzaifa157/IntelliTest/issues"
+  },
+  "homepage": "https://github.com/huzaifa157/IntelliTest#readme"
 }
